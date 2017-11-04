@@ -33,7 +33,7 @@ jQuery(document).ready(function($) {
   // Gets the data from the FORM and pushes it to print_matter()
   function get_matter_data(){
     var data = {};
-    $('#hi-form').serializeArray().map(function(x){
+    $('#open-form').serializeArray().map(function(x){
       data[x.name] = x.value;
     });
     setTimeout(function() {
@@ -42,8 +42,7 @@ jQuery(document).ready(function($) {
   }
 
   // This watches for any keyup events (typing) in the form fields
-  $( "#hi-form .fm" ).keyup(function( event ) {
-    console.log('rrr');
+  $( "#open-form .fm" ).keyup(function( event ) {
     get_matter_data();
   });
 
@@ -95,7 +94,7 @@ jQuery(document).ready(function($) {
 
   // Makes the slug: for the front matter
   function matter_slug(title) {
-    t = title.replace(new RegExp(small_words, "gi"), '');     // removes the small_words
+    t = title.replace(new RegExp(small_words, "gi"), '');               // removes the small_words
     t = t.replace(/[^a-zA-Z0-9\s]/g,"");                                // removes anything that is not a number or letter (i think)
     t = t.toLowerCase();                                                // makes the title all lowercase
     t = t.replace(/\s\s+/g, ' ');                                       // replaces multiple spaces with single spaces
@@ -105,12 +104,15 @@ jQuery(document).ready(function($) {
   }
 
   // Makes the title for the front matter
-  function matter_title(t) {
+  function matter_title(t, m) {
     t = t.replace(/\s\s+/g, ' ');           // replaces multiple spaces with single spaces
     t = t.replace(/[ \t]+$/g, '');          // removes trailing spaces from title
-    var title = escapeHtml(t);
+    var title = escapeHtml(t) +'-'+ m;
     return title;
   }
+
+  $('.m_title input').val('hi');
+
 
   // Makes commit message
   function matter_commit_msg(post_type, title) {
@@ -133,7 +135,7 @@ jQuery(document).ready(function($) {
 
   // Makes branch name
   function matter_branch_name(post_type, slug) {
-    var branch_name = 'new-' + post_type + '-' + slug;
+    var branch_name = 'hi-' + slug;
     return branch_name;
   }
 
@@ -171,12 +173,12 @@ jQuery(document).ready(function($) {
   function print_matter(data){
     var post_type = 'post';
     var datetime = matter_datetime();
-    var title = "'" + matter_title(data['m_title']) + "'";
+    var title = "'" + data['m_title'] + "'";
     var slug = matter_slug(data['m_title']);
     var filename = get_filename(curr_date(), slug);
     var msg = data['m_msg'];
     var commit_msg = matter_commit_msg(post_type, matter_title(data['m_title']));
-    var commit_desc = matter_commit_desc(post_type, matter_title(data['m_title']), escapeHtml(data['m_summary']), slug, filename);
+    var commit_desc = matter_commit_desc(post_type, matter_title(data['m_title']), 'summmary goes here', slug, filename);
     var branch = matter_branch_name(post_type, slug);
 
     // Checks to see what the post type is and prints the front-matter for each type
@@ -189,15 +191,15 @@ jQuery(document).ready(function($) {
         "title: " + title,
         "author: " + list_items(data['m_author']),
       "---",
-      ,
       msg
     ].join("\n");
     var body = encodeURIComponent(matter);
-    var newfile = 'https://github.com/GSA/digitalgov.gov/new/demo/content/posts/'+file_yearmo(data['m_date'])+'/draft?filename='+filename+'&value='+body+'&message='+commit_msg+'&description='+commit_desc+'&target_branch='+branch;
+    var submit_url = 'https://github.com/GSA/hi/new/master/_posts/'+file_yearmo(curr_date())+'/draft?filename='+filename+'&value='+body+'&message='+commit_msg+'&description='+commit_desc+'&target_branch='+branch;
 
     $('#post-matter').text(matter);
     $('#filename').text(filename);
-    $('#newfile').attr('href', newfile);
+    $('#open-form').attr('action', submit_url);
+    $('.btn').attr('href', submit_url);
   }
 
 });
