@@ -1,0 +1,26 @@
+{
+  "name": "hi",
+  "version": "1.0.0",
+  "description": "hi",
+  "main": "index.js",
+  "dependencies": {
+    "uswds": "^1.4.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GSA/hi.git"
+  },
+  "keywords": [
+    "hi"
+  ],
+  "author": "jeremyzilar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GSA/hi/issues"
+  },
+  "homepage": "https://github.com/GSA/hi#readme"
+}
