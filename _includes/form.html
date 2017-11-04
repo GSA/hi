@@ -1,10 +1,24 @@
-<form id="hi-form" action="index.html" method="post">
-  <input class="fm" type="text" name="m_datetime" value="" placeholder="date">
-  <input class="fm" type="text" name="m_title" value="" placeholder="title">
-  <input class="fm" type="text" name="m_author" value="" placeholder="author">
-  <textarea class="fm" name="m_msg" placeholder="mgs"></textarea>
-  <pre id="post-matter">
+<form id="open-form" action="index.html" method="post">
+  <label class="m_datetime" for="m_datetime">
+    date/time
+    <input class="fm" type="text" name="m_datetime" value="" placeholder="date">
+  </label>
 
-  </pre>
-  <input type="submit" name="submit" value="submit">
+  <label class="m_title" for="m_title">
+    Title
+    <input class="fm" type="text" name="m_title" value="" placeholder="title">
+  </label>
+
+  <label class="m_author" for="m_author">
+    Author
+    <input class="fm" type="text" name="m_author" value="" placeholder="author">
+  </label>
+
+  <label class="m_msg" for="m_msg">
+    Message
+    <textarea class="fm" name="m_msg" placeholder="mgs"></textarea>
+  </label>
+
+  <pre id="post-matter">---</pre>
+  <a class="btn" target="_new" href="#">submit</a>
 </form>
