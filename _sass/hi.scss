@@ -2,6 +2,17 @@ main{
   // width:600px;
 }
 
+.hidden{
+  display: none;
+}
+
+label{
+  span{
+    font-size: 14px;
+    font-style: italic;
+  }
+}
+
 pre{
   padding: 20px;
   background: #efefef;

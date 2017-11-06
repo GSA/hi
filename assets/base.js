@@ -184,7 +184,6 @@ jQuery(document).ready(function($) {
     // POST
     var matter = [
       "---",
-        "layout: post",
         "date: " + datetime,
         "title: " + title,
         "author: " + list_items(data['m_author']),
